@@ -59,3 +59,13 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2025-04-26 16:00:18
+CREATE TABLE IF NOT EXISTS casos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome_paciente VARCHAR(100) NOT NULL,
+    cpf VARCHAR(14) NOT NULL,
+    cidade VARCHAR(50) NOT NULL CHECK (cidade IN ('São Paulo', 'Guarulhos', 'Campinas', 'São Bernardo do Campo', 'Santo André')),
+    tipo_diabetes ENUM('Tipo 1', 'Tipo 2') NOT NULL,
+    estado_tratamento ENUM('Sem tratamento', 'Em tratamento', 'Internado', 'Óbito') NOT NULL,
+    data_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
