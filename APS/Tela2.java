@@ -46,13 +46,13 @@ public class Tela2 extends JFrame {
         painelCentral.setBorder(BorderFactory.createEmptyBorder(60, 200, 60, 200));
         painelCentral.setBackground(fundo);
 
-        botao1 = new JButton("Consulta");
+        botao1 = new JButton("Registro");
         // Ação do botão "Consulta"
         botao1.addActionListener(e -> {
         new Tela3(); });
 
-        botao2 = new JButton("Medicamentos");
-        botao3 = new JButton("Agenda");
+        botao2 = new JButton("Consulta");
+        botao3 = new JButton("Gráfico");
         botao4 = new JButton("Informações");
 
         for (JButton botao : new JButton[]{botao1, botao2, botao3, botao4}) {

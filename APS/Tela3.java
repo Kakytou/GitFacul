@@ -1,74 +1,129 @@
 package APS;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
 
-public class Tela3 extends JFrame {
+public class Tela3 extends JFrame implements ActionListener {
+
+    private JTextField campoNome;
+    private JFormattedTextField campoCpf;
+    private JComboBox<String> comboCidade, comboTipo, comboEstado;
+    private JButton botaoSalvar;
 
     public Tela3() {
-        setTitle("Registro de Consulta");
+        setTitle("Registro de Paciente");
+        setSize(600, 450);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(600, 400);
         setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
 
-        // Estilo
-        Color fundo = new Color(224, 255, 255);
-        Font fonteLabel = new Font("Candara", Font.PLAIN, 20);
-
-        // Título
-        JLabel titulo = new JLabel("Registro de Consulta");
-        titulo.setHorizontalAlignment(SwingConstants.CENTER);
-        titulo.setFont(new Font("Candara", Font.BOLD, 28));
-        titulo.setForeground(new Color(0, 102, 102));
-
-        // Painel principal
+        // Painel com GridBagLayout para maior controle
         JPanel painel = new JPanel(new GridBagLayout());
-        painel.setBackground(fundo);
-        GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(10, 10, 10, 10);
-        c.fill = GridBagConstraints.HORIZONTAL;
+        painel.setBackground(new Color(224, 255, 255));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 20, 10, 20);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Campo: Nome do paciente
-        JLabel nomeLabel = new JLabel("Nome do Paciente:");
-        nomeLabel.setFont(fonteLabel);
-        JTextField campoNome = new JTextField(20);
-        campoNome.setFont(fonteLabel);
+        // Nome do Paciente
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        painel.add(new JLabel("Nome do Paciente:"), gbc);
+        gbc.gridx = 1;
+        campoNome = new JTextField(20);
+        painel.add(campoNome, gbc);
 
-        c.gridx = 0;
-        c.gridy = 0;
-        painel.add(nomeLabel, c);
-        c.gridx = 1;
-        painel.add(campoNome, c);
+        // CPF com formatação
+        gbc.gridx = 0;
+        gbc.gridy++;
+        painel.add(new JLabel("CPF:"), gbc);
+        try {
+            MaskFormatter mask = new MaskFormatter("###.###.###-##");
+            mask.setPlaceholderCharacter('_');
+            campoCpf = new JFormattedTextField(mask);
+            campoCpf.setColumns(20);
+        } catch (Exception e) {
+            campoCpf = new JFormattedTextField();
+        }
+        gbc.gridx = 1;
+        painel.add(campoCpf, gbc);
 
-        // Campo: Cidade (ComboBox)
-        JLabel cidadeLabel = new JLabel("Cidade:");
-        cidadeLabel.setFont(fonteLabel);
-        String[] cidades = {"São Paulo", "Guarulhos", "Campinas", "São Bernardo do Campo", "Santo André"};
-        JComboBox<String> comboCidade = new JComboBox<>(cidades);
-        comboCidade.setFont(fonteLabel);
+        // Cidade
+        gbc.gridx = 0;
+        gbc.gridy++;
+        painel.add(new JLabel("Cidade:"), gbc);
+        gbc.gridx = 1;
+        comboCidade = new JComboBox<>(new String[]{
+                "São Paulo", "Guarulhos", "Campinas", 
+                "São Bernardo do Campo", "Santo André"
+        });
+        painel.add(comboCidade, gbc);
 
-        c.gridx = 0;
-        c.gridy = 1;
-        painel.add(cidadeLabel, c);
-        c.gridx = 1;
-        painel.add(comboCidade, c);
+        // Tipo de Diabetes
+        gbc.gridx = 0;
+        gbc.gridy++;
+        painel.add(new JLabel("Tipo de Diabetes:"), gbc);
+        gbc.gridx = 1;
+        comboTipo = new JComboBox<>(new String[]{"Tipo 1", "Tipo 2"});
+        painel.add(comboTipo, gbc);
 
-        // Botão confirmar
-        JButton confirmar = new JButton("Confirmar Registro");
-        confirmar.setFont(fonteLabel);
-        confirmar.setBackground(new Color(173, 216, 230));
-        confirmar.setFocusPainted(false);
+        // Estado do Tratamento
+        gbc.gridx = 0;
+        gbc.gridy++;
+        painel.add(new JLabel("Estado do Tratamento:"), gbc);
+        gbc.gridx = 1;
+        comboEstado = new JComboBox<>(new String[]{
+                "Sem tratamento", "Em tratamento", "Internado", "Óbito"
+        });
+        painel.add(comboEstado, gbc);
 
-        c.gridx = 0;
-        c.gridy = 2;
-        c.gridwidth = 2;
-        painel.add(confirmar, c);
+        // Botão Salvar
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        botaoSalvar = new JButton("Salvar Registro");
+        botaoSalvar.setPreferredSize(new Dimension(200, 40));
+        botaoSalvar.addActionListener(this);
+        painel.add(botaoSalvar, gbc);
 
-        // Adiciona ao frame
-        add(titulo, BorderLayout.NORTH);
-        add(painel, BorderLayout.CENTER);
-
+        add(painel);
         setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String nome = campoNome.getText();
+        String cpf = campoCpf.getText();
+        String cidade = comboCidade.getSelectedItem().toString();
+        String tipo = comboTipo.getSelectedItem().toString();
+        String estado = comboEstado.getSelectedItem().toString();
+
+        try {
+            // Altere os valores abaixo conforme o seu ambiente:
+            String url = "jdbc:mysql://localhost:3306/seudatabase";  // Substituir
+            String usuario = "root";
+            String senha = "sua_senha";
+
+            Connection conn = DriverManager.getConnection(url, usuario, senha);
+            PreparedStatement stmt = conn.prepareStatement(
+                "INSERT INTO casos (nome_paciente, cpf, cidade, tipo_diabetes, estado_tratamento) " +
+                "VALUES (?, ?, ?, ?, ?)"
+            );
+
+            stmt.setString(1, nome);
+            stmt.setString(2, cpf);
+            stmt.setString(3, cidade);
+            stmt.setString(4, tipo);
+            stmt.setString(5, estado);
+
+            stmt.executeUpdate();
+            conn.close();
+
+            JOptionPane.showMessageDialog(this, "Registro salvo com sucesso!");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar: " + ex.getMessage());
+        }
     }
 }
