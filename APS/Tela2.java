@@ -33,12 +33,7 @@ public class Tela2 extends JFrame {
         painelTopo.setPreferredSize(new Dimension(100, 100));
         painelTopo.add(titulo, BorderLayout.CENTER);
 
-        // Botão de pesquisa no canto superior direito
-        botaoPesquisa = new JButton("🔍");
-        botaoPesquisa.setPreferredSize(new Dimension(60, 40));
-        botaoPesquisa.setFocusPainted(false);
-        botaoPesquisa.setBackground(new Color(200, 230, 230));
-        painelTopo.add(botaoPesquisa, BorderLayout.EAST);
+    
 
         // Painel Central com botões em coluna
         painelCentral = new JPanel();
@@ -46,14 +41,14 @@ public class Tela2 extends JFrame {
         painelCentral.setBorder(BorderFactory.createEmptyBorder(60, 200, 60, 200));
         painelCentral.setBackground(fundo);
 
-        botao1 = new JButton("Registro");
+        botao1 = new JButton("Cadastrar");
         // Ação do botão "Consulta"
         botao1.addActionListener(e -> {
         new Tela3(); });
 
-        botao2 = new JButton("Consulta");
-        botao3 = new JButton("Gráfico");
-        botao4 = new JButton("Informações");
+        botao2 = new JButton("Alterar");
+        botao3 = new JButton("Deletar");
+        botao4 = new JButton("Consultar");
 
         for (JButton botao : new JButton[]{botao1, botao2, botao3, botao4}) {
             botao.setFont(fonteBotao);

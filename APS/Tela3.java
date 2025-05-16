@@ -105,7 +105,7 @@ public class Tela3 extends JFrame implements ActionListener {
             // Altere os valores abaixo conforme o seu ambiente:
             String url = "jdbc:mysql://localhost:3306/aps";  // Substituir
             String usuario = "root";
-            String senha = "Ka1234568!";
+            String senha = "APS-2025";
 
             Connection conn = DriverManager.getConnection(url, usuario, senha);
             PreparedStatement stmt = conn.prepareStatement(
