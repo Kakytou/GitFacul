@@ -24,7 +24,7 @@ public class Tela2 extends JFrame {
         // Título
         titulo = new JLabel("Bem-vindo à Central da Saúde");
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
-        titulo.setFont(new Font("Candara", Font.BOLD, 36));
+        titulo.setFont(new Font("Times New Roman", Font.BOLD, 36));
         titulo.setForeground(new Color(0, 102, 102));
 
         // Painel Superior (contendo o título)
