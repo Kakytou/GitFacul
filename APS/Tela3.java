@@ -97,26 +97,28 @@ public class Tela3 extends JFrame implements ActionListener {
         String nome = campoNome.getText();
         String cpf = campoCpf.getText();
         String cidade = comboCidade.getSelectedItem().toString();
+        int id_cidade = comboCidade.getSelectedIndex()+ 1;
         String tipo = comboTipo.getSelectedItem().toString();
         String estado = comboEstado.getSelectedItem().toString();
 
         try {
             // Altere os valores abaixo conforme o seu ambiente:
-            String url = "jdbc:mysql://localhost:3306/seudatabase";  // Substituir
+            String url = "jdbc:mysql://localhost:3306/aps";  // Substituir
             String usuario = "root";
-            String senha = "sua_senha";
+            String senha = "Ka1234568!";
 
             Connection conn = DriverManager.getConnection(url, usuario, senha);
             PreparedStatement stmt = conn.prepareStatement(
-                "INSERT INTO casos (nome_paciente, cpf, cidade, tipo_diabetes, estado_tratamento) " +
-                "VALUES (?, ?, ?, ?, ?)"
+                "INSERT INTO pacientes (nome_paciente, cpf, id_cidade, nome_cidade, tipo_diabetes, estado_tratamento) " +
+                "VALUES (?, ?, ?, ?, ?, ?)"
             );
 
             stmt.setString(1, nome);
             stmt.setString(2, cpf);
-            stmt.setString(3, cidade);
-            stmt.setString(4, tipo);
-            stmt.setString(5, estado);
+            stmt.setInt(3, id_cidade);
+            stmt.setString(4, cidade);
+            stmt.setString(5, tipo);
+            stmt.setString(6, estado);
 
             stmt.executeUpdate();
             conn.close();
