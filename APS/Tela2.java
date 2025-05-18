@@ -47,6 +47,11 @@ public class Tela2 extends JFrame {
         new Tela3(); });
 
         botao2 = new JButton("Alterar");
+        botao2.addActionListener(e -> {
+            new Tela4();
+        });
+
+
         botao3 = new JButton("Deletar");
         botao4 = new JButton("Consultar");
 
