@@ -131,13 +131,13 @@ public class Tela5 extends JFrame {
             Connection conn = DriverManager.getConnection(url, usuario, senha);
 
             String sql = "SELECT id_paciente, nome_paciente, cpf, nome_cidade, tipo_diabetes, estado_tratamento " +
-                         "FROM pacientes WHERE nome_paciente LIKE ? OR cpf LIKE ? OR nome_cidade LIKE ?";
+                         "FROM pacientes WHERE nome_paciente LIKE ? OR cpf LIKE ?";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             String termo = "%" + textoBusca + "%";
             stmt.setString(1, termo);
             stmt.setString(2, termo);
-            stmt.setString(3, termo);
+            
 
             ResultSet rs = stmt.executeQuery();
 
