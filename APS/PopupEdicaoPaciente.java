@@ -12,7 +12,7 @@ public class PopupEdicaoPaciente extends JDialog {
     private Tela4 telaPai;
 
     public PopupEdicaoPaciente(Tela4 telaPai, String cpf) {
-        super(telaPai, "Editar Paciente", true); // Janela modal
+        super(telaPai, "Editar Paciente", true);
         this.cpfOriginal = cpf;
         this.telaPai = telaPai;
 
@@ -50,7 +50,7 @@ public class PopupEdicaoPaciente extends JDialog {
         add(btnCancelar);
 
         carregarDadosDoBanco();
-        setVisible(true); // ESSENCIAL!
+        setVisible(true);
     }
 
     private void carregarDadosDoBanco() {

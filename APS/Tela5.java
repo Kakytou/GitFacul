@@ -21,19 +21,19 @@ public class Tela5 extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
-        getContentPane().setBackground(new Color(0xE1F5FE)); // fundo geral
+        getContentPane().setBackground(new Color(0xE1F5FE));
 
         Font fonteTitulo = new Font("Times New Roman", Font.BOLD, 24);
         Font fontePadrao = new Font("Segoe UI", Font.PLAIN, 14);
 
-        // Cabeçalho com fundo azul claro e fonte grande
+        
         JLabel titulo = new JLabel("Central da Saúde - Deletar Pacientes", JLabel.CENTER);
         titulo.setFont(fonteTitulo);
         titulo.setForeground(new Color(0, 102, 102));
         titulo.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
         add(titulo, BorderLayout.NORTH);
 
-        // Campo de busca
+        
         campoBusca = new JTextField(20);
         campoBusca.setFont(fontePadrao);
 
@@ -48,12 +48,12 @@ public class Tela5 extends JFrame {
 
         
 
-        // Tabela com modelo não editável
+        
         modelo = new DefaultTableModel(new String[]{
             "ID", "Nome", "CPF", "Cidade", "Tipo Diabetes", "Estado Tratamento"
         }, 0) {
             public boolean isCellEditable(int row, int column) {
-                return false; // impede edição direta
+                return false;
             }
         };
 
@@ -69,7 +69,7 @@ public class Tela5 extends JFrame {
         scroll.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
         add(scroll, BorderLayout.CENTER);
 
-        // Botão Excluir
+        
         botaoExcluir = new JButton("Excluir paciente");
         botaoExcluir.setFont(fontePadrao);
         botaoExcluir.setFocusPainted(false);
@@ -201,7 +201,7 @@ public class Tela5 extends JFrame {
             }
         }
 
-        // Reset cores do JOptionPane
+        
         UIManager.put("OptionPane.background", null);
         UIManager.put("Panel.background", null);
         UIManager.put("OptionPane.messageForeground", null);

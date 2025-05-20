@@ -25,14 +25,14 @@ public class Tela4 extends JFrame {
         Font fonteTitulo = new Font("Times New Roman", Font.BOLD, 24);
         Font fontePadrao = new Font("Segoe UI", Font.PLAIN, 14);
 
-        // Cabeçalho
+        
         JLabel titulo = new JLabel("Central da Saúde - Alterar Pacientes", JLabel.CENTER);
         titulo.setFont(fonteTitulo);
         titulo.setForeground(new Color(0, 102, 102));
         titulo.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
         add(titulo, BorderLayout.NORTH);
 
-        // Tabela
+        
         modelo = new DefaultTableModel(new String[]{
             "ID", "Nome", "CPF", "Cidade", "Tipo Diabetes", "Estado Tratamento"
         }, 0) {
@@ -53,7 +53,7 @@ public class Tela4 extends JFrame {
         scroll.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
         add(scroll, BorderLayout.CENTER);
 
-        // Painel inferior com campo de busca e botões
+        
         JPanel painelInferior = new JPanel();
         painelInferior.setLayout(new FlowLayout(FlowLayout.CENTER));
         painelInferior.setBackground(new Color(0xE1F5FE));

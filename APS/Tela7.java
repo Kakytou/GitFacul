@@ -30,7 +30,7 @@ public class Tela7 extends JFrame {
         Font fonteTitulo = new Font("Times New Roman", Font.BOLD, 28);
         Font fontePadrao = new Font("Candara", Font.PLAIN, 16);
 
-        // Painel topo com título
+        
         JLabel titulo = new JLabel("Estatísticas - Comparação de Pacientes", SwingConstants.CENTER);
         titulo.setFont(fonteTitulo);
         titulo.setForeground(new Color(0, 102, 102));
@@ -40,7 +40,7 @@ public class Tela7 extends JFrame {
         painelTopo.add(titulo, BorderLayout.CENTER);
         add(painelTopo, BorderLayout.NORTH);
 
-        // Painel filtros
+        
         JPanel painelFiltros = new JPanel();
         painelFiltros.setBackground(fundo);
         painelFiltros.setLayout(new GridBagLayout());
@@ -48,7 +48,7 @@ public class Tela7 extends JFrame {
         gbc.insets = new Insets(10, 15, 10, 15);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Tipo Diabetes
+        
         gbc.gridx = 0; gbc.gridy = 0;
         painelFiltros.add(new JLabel("Tipo de Diabetes:"), gbc);
         comboTipoDiabetes = new JComboBox<>(new String[]{"Todos os Tipos", "Tipo 1", "Tipo 2"});
@@ -56,7 +56,7 @@ public class Tela7 extends JFrame {
         gbc.gridx = 1;
         painelFiltros.add(comboTipoDiabetes, gbc);
 
-        // Cidade 1
+        
         gbc.gridx = 0; gbc.gridy = 1;
         painelFiltros.add(new JLabel("Cidade 1:"), gbc);
         comboCidade1 = new JComboBox<>(cidades);
@@ -64,7 +64,7 @@ public class Tela7 extends JFrame {
         gbc.gridx = 1;
         painelFiltros.add(comboCidade1, gbc);
 
-        // Cidade 2 (opcional)
+        
         gbc.gridx = 0; gbc.gridy = 2;
         painelFiltros.add(new JLabel("Cidade 2 (comparar com):"), gbc);
         String[] cidadesComTodas = new String[cidades.length + 1];
@@ -75,7 +75,7 @@ public class Tela7 extends JFrame {
         gbc.gridx = 1;
         painelFiltros.add(comboCidade2, gbc);
 
-        // Estado do Paciente
+        
         gbc.gridx = 0; gbc.gridy = 3;
         painelFiltros.add(new JLabel("Estado do Paciente:"), gbc);
         comboEstado = new JComboBox<>(new String[]{
@@ -85,7 +85,7 @@ public class Tela7 extends JFrame {
         gbc.gridx = 1;
         painelFiltros.add(comboEstado, gbc);
 
-        // Botão gerar gráfico
+        
         botaoGerarGrafico = new JButton("Gerar Gráfico");
         botaoGerarGrafico.setFont(fontePadrao);
         botaoGerarGrafico.setBackground(new Color(173, 216, 230));
@@ -96,13 +96,13 @@ public class Tela7 extends JFrame {
 
         add(painelFiltros, BorderLayout.WEST);
 
-        // Painel para exibir gráfico
+        
         painelGrafico = new JPanel(new BorderLayout());
         painelGrafico.setBackground(Color.WHITE);
         painelGrafico.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(painelGrafico, BorderLayout.CENTER);
 
-        // Ação do botão para gerar gráfico
+        
         botaoGerarGrafico.addActionListener(e -> gerarGrafico());
 
         setVisible(true);
@@ -114,7 +114,7 @@ public class Tela7 extends JFrame {
         String cidade2 = comboCidade2.getSelectedItem().toString();
         String estado = comboEstado.getSelectedItem().toString();
 
-        // Montar query e dataset
+        
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         try {
@@ -123,9 +123,9 @@ public class Tela7 extends JFrame {
             String senha = "APS-2025";
             Connection conn = DriverManager.getConnection(url, usuario, senha);
 
-            // Se selecionou "Todas as Cidades" na cidade 2, considerar todas as cidades
+            
             if (cidade2.equals("Todas as Cidades")) {
-                // Consulta agrupada por cidades (considerando filtros de tipo e estado)
+                
                 String sql = "SELECT nome_cidade, COUNT(*) AS total FROM pacientes WHERE 1=1 ";
                 if (!tipoDiabetes.equals("Todos os Tipos")) {
                     sql += "AND tipo_diabetes = ? ";
@@ -155,7 +155,7 @@ public class Tela7 extends JFrame {
                 ps.close();
 
             } else {
-                // Comparação entre duas cidades (cidade1 vs cidade2)
+                
                 String sql = "SELECT nome_cidade, COUNT(*) AS total FROM pacientes WHERE nome_cidade IN (?, ?) ";
                 if (!tipoDiabetes.equals("Todos os Tipos")) {
                     sql += "AND tipo_diabetes = ? ";
@@ -193,7 +193,7 @@ public class Tela7 extends JFrame {
             return;
         }
 
-        // Criar gráfico de barras
+        
         JFreeChart grafico = ChartFactory.createBarChart(
                 "Comparativo de Pacientes",
                 "Cidade",
@@ -205,12 +205,12 @@ public class Tela7 extends JFrame {
                 false
         );
 
-        // Personalizar cores padrão para seguir o padrão Tela2
+        
         CategoryPlot plot = grafico.getCategoryPlot();
         plot.setBackgroundPaint(new Color(224, 255, 255));
         plot.setRangeGridlinePaint(Color.GRAY);
 
-        // Limpar painel e adicionar gráfico novo
+        
         painelGrafico.removeAll();
         ChartPanel chartPanel = new ChartPanel(grafico);
         painelGrafico.add(chartPanel, BorderLayout.CENTER);

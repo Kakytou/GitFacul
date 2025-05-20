@@ -19,14 +19,14 @@ public class Tela3 extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Painel com GridBagLayout para maior controle
+        
         JPanel painel = new JPanel(new GridBagLayout());
         painel.setBackground(new Color(224, 255, 255));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 20, 10, 20);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Nome do Paciente
+        
         gbc.gridx = 0;
         gbc.gridy = 0;
         painel.add(new JLabel("Nome do Paciente:"), gbc);
@@ -34,7 +34,7 @@ public class Tela3 extends JFrame implements ActionListener {
         campoNome = new JTextField(20);
         painel.add(campoNome, gbc);
 
-        // CPF com formatação
+        
         gbc.gridx = 0;
         gbc.gridy++;
         painel.add(new JLabel("CPF:"), gbc);
@@ -49,7 +49,7 @@ public class Tela3 extends JFrame implements ActionListener {
         gbc.gridx = 1;
         painel.add(campoCpf, gbc);
 
-        // Cidade
+        
         gbc.gridx = 0;
         gbc.gridy++;
         painel.add(new JLabel("Cidade:"), gbc);
@@ -60,7 +60,7 @@ public class Tela3 extends JFrame implements ActionListener {
         });
         painel.add(comboCidade, gbc);
 
-        // Tipo de Diabetes
+        
         gbc.gridx = 0;
         gbc.gridy++;
         painel.add(new JLabel("Tipo de Diabetes:"), gbc);
@@ -68,7 +68,7 @@ public class Tela3 extends JFrame implements ActionListener {
         comboTipo = new JComboBox<>(new String[]{"Tipo 1", "Tipo 2"});
         painel.add(comboTipo, gbc);
 
-        // Estado do Tratamento
+        
         gbc.gridx = 0;
         gbc.gridy++;
         painel.add(new JLabel("Estado do Tratamento:"), gbc);
@@ -78,7 +78,7 @@ public class Tela3 extends JFrame implements ActionListener {
         });
         painel.add(comboEstado, gbc);
 
-        // Botão Salvar
+        
         gbc.gridx = 0;
         gbc.gridy++;
         gbc.gridwidth = 2;
@@ -102,8 +102,8 @@ public class Tela3 extends JFrame implements ActionListener {
         String estado = comboEstado.getSelectedItem().toString();
 
         try {
-            // Altere os valores abaixo conforme o seu ambiente:
-            String url = "jdbc:mysql://localhost:3306/aps";  // Substituir
+            
+            String url = "jdbc:mysql://localhost:3306/aps";
             String usuario = "root";
             String senha = "APS-2025";
 

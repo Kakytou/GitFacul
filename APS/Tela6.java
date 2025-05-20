@@ -22,7 +22,7 @@ public class Tela6 extends JFrame {
         gbc.insets = new Insets(10, 20, 10, 20);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Campo de busca por nome
+        
         gbc.gridx = 0;
         gbc.gridy = 0;
         painel.add(new JLabel("Buscar por nome:"), gbc);
@@ -31,7 +31,7 @@ public class Tela6 extends JFrame {
         campoBusca = new JTextField(20);
         painel.add(campoBusca, gbc);
 
-        // Botão buscar
+        
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
@@ -41,7 +41,7 @@ public class Tela6 extends JFrame {
         botaoBuscar.addActionListener(e -> consultarPacientes());
         painel.add(botaoBuscar, gbc);
 
-        // Área de resultados
+        
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 2;
